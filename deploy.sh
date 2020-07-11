@@ -1,19 +1,22 @@
-# abort on errors 
-set -e 
+set -e
 
-# build 
-echo Linting.. 
-npm run lint 
-echo Building. this may take a minute... 
-npm run build 
+# build
+npm run build
 
-# if you are deploying to a custom domain add a CNAME (uncomment the next 3 lines) 
-#cd docs 
-#echo 'yourcustomdomain.com' > CNAME 
-#cd - 
+# navigate into the build output directory
+cd dist
 
-# deploy 
-echo Deploying.. 
-git add -A 
-git commit -m 'deploy' 
-git push -f https://github.com/kanuos/vue-test-deploy.git master
+# if you are deploying to a custom domain
+# echo 'www.example.com' > CNAME
+
+git init
+git add -A
+git commit -m 'deploy'
+
+# if you are deploying to https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+# if you are deploying to https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:kanuos/vue-test-deploy.git master:gh-pages
+
+cd -
